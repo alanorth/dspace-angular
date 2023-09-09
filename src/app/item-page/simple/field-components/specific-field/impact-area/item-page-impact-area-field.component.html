@@ -1,0 +1,34 @@
+<div class="item-page-field" *ngIf="item?.allMetadata(fields).length">
+    <ds-metadata-field-wrapper>
+        <div class="simple-view-element">
+            <h5 class="simple-view-element-header">{{ label | translate }}</h5>
+            <div class="simple-view-element-body">
+                <div class="row">
+                    <!-- Iterate over metadata values and send them to the impactAreaIcon template -->
+                    <ng-container *ngFor="let mdValue of item?.allMetadata(fields)">
+                        <ng-container *ngTemplateOutlet="impactAreaIcon;
+                                                         context: {
+                                                            value: mdValue.value,
+                                                         }">
+                        </ng-container>
+                    </ng-container>
+                </div>
+            </div>
+        </div>
+    </ds-metadata-field-wrapper>
+</div>
+
+<!-- Render the Impact Area icon.
+     See: https://www.cgiar.org/research/cgiar-portfolio/
+-->
+<ng-template #impactAreaIcon let-value="value">
+    <!-- Two icons per row on mobile, three on medium and up. -->
+    <div class="col-6 col-md-4" style="text-align: center;">
+        <a style="text-decoration: none;" href="/search?query=&f.impactArea={{ value }},equals&spc.page=1">
+            <img src="assets/images/impact-area-icons/{{ parseImpactArea(value) }}" [alt]="value" [title]="value" class="icon"/>
+            <div style="margin-top: 10px;">
+                <span>{{ value }}</span>
+            </div>
+        </a>
+    </div>
+</ng-template>
