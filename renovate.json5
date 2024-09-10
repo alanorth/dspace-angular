@@ -12,6 +12,6 @@
       "matchDepTypes": ["devDependencies"],
       "prPriority": -1
     },
-  ]
+  ],
   "rangeStrategy": "bump",
 }
