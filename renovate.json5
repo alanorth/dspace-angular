@@ -1,17 +1,13 @@
 {
-  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": [
-    "config:recommended"
+    ":preserveSemverRanges",
+    "group:all",
   ],
-  "packageRules": [
-    {
-      "matchUpdateTypes": ["minor", "patch"],
-      "enabled": false
-    },
-    {
-      "matchDepTypes": ["devDependencies"],
-      "prPriority": -1
-    },
-  ],
-  "rangeStrategy": "bump",
+  "lockFileMaintenance": {
+    "commitMessageAction": "Update",
+    "extends": [
+      "group:all"
+    ]
+  },
+  "separateMajorMinor": false
 }
