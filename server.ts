@@ -32,6 +32,7 @@ import { createCertificate } from 'pem';
 import { createServer } from 'https';
 import { json } from 'body-parser';
 import { createHttpTerminator } from 'http-terminator';
+import { capCheckpoint } from '@cap.js/checkpoint-express';
 
 import { readFileSync } from 'fs';
 import { join } from 'path';
@@ -186,6 +187,17 @@ export function app() {
     });
     server.use(limiter);
   }
+
+  server.use(
+    capCheckpoint({
+      /*
+        token_validity_hours: 32,
+        tokens_store_path: ".data/tokensList.json",
+        token_size: 16,
+        verification_template_path: join(__dirname, "./index.html"),
+      */
+    })
+  );
 
   /*
    * Serve static resources (images, i18n messages, …)
